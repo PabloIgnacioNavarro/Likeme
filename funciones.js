@@ -16,4 +16,14 @@ const escribirPosts1 = async (titulo, url, descripcion) => {
   await pool.query(consulta, values);
   console.log("Post agregado");
 };
-module.exports = { leerPosts1, escribirPosts1 };
+const agregarLike = async (id) => {
+  const consulta = "UPDATE posts SET likes = (likes +1) WHERE id =$1";
+  const values = [id];
+  await pool.query(consulta, values);
+};
+const borrarPost = async (id) => {
+  const consulta = "DELETE * FROM posts WHERE id = $1";
+  const values = [id];
+  await pool.query(consulta, values);
+};
+module.exports = { leerPosts1, escribirPosts1, agregarLike, borrarPost };
